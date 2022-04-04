@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 	@Entity
-	@Table (name = "product-tbl")
+	@Table (name = "productrest_tbl")
 	public class Product {
 		
 		@Id
@@ -27,6 +27,20 @@ import javax.persistence.Table;
 		
 		@Column(name = "price")
 		private double price;
+
+		
+		
+		public Product(Long id, String code, String name, String type, double price) {
+			this.id = id;
+			this.code = code;
+			this.name = name;
+			this.type = type;
+			this.price = price;
+		}
+		
+		public Product() {
+			
+		}
 
 		public Long getId() {
 			return id;
