@@ -34,12 +34,12 @@ public List<Product> showProduct() {
 	}
 
 @GetMapping("/show/{id}")
-public ResponseEntity<Optional <Product>>showById(@PathVariable Long id){
+public ResponseEntity<Product>showById(@PathVariable Long id){
 	try {
-		Optional<Product> product = pService.findById(id);
-		return new ResponseEntity<Optional <Product>>(product, HttpStatus.OK);
+		Product product = pService.findById(id);
+		return new ResponseEntity<Product>(HttpStatus.OK);
 	}catch(NoSuchElementException e){
-		return new ResponseEntity<Optional <Product>>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
 		}
 	}
 
@@ -55,7 +55,7 @@ public void deleteProduct(@PathVariable Long id) {
 	}
 
 @PutMapping("/update/{id}")
-public Optional<Product> updateProduct(@PathVariable Long id, @RequestBody Product product){
+public Product updateProduct(@PathVariable Long id, @RequestBody Product product){
 	ResponseEntity.ok(pService.equals(product));
 	return pService.findById(id);
 	

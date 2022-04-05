@@ -1,7 +1,6 @@
 package com.widetech.project.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -22,8 +21,8 @@ public class ProductService {
 		return repo.findAll();
 	}
 	
-	public Optional<Product> findById(Long id){
-		return repo.findById(id);
+	public Product findById(Long id){
+		return repo.findById(id).get();
 	}
 	
 	public Product save(Product product) {
