@@ -1,15 +1,21 @@
 package com.widetech.project.domain;
 
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table (name = "orderitemrest_tbl")
-public class OrderItem {
+public class OrderItem implements Serializable{
 	
 		
 		@Id
@@ -32,6 +38,10 @@ public class OrderItem {
 		
 		@Column(name = "price")
 		private double price;
+		
+		@ManyToOne()
+		@JoinColumn(name="order_id")
+		private Order order;
 		
 		
 
@@ -88,6 +98,15 @@ public class OrderItem {
 		public void setPrice(double price) {
 			this.price = price;
 		}
+
+		public Order getOrder() {
+			return order;
+		}
+
+		public void setOrder(Order order) {
+			this.order = order;
+		}		
+		
 		
 		
 }

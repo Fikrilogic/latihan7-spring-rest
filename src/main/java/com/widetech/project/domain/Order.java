@@ -3,6 +3,8 @@ package com.widetech.project.domain;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,23 +20,20 @@ public class Order {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private Long id;
 	
+	@Column
 	private Date createAt;
+
 	
-	private double totalPrice;
-	
-	@OneToMany (mappedBy = "order")
+	@OneToMany (cascade = {CascadeType.ALL})
 	private List<OrderItem> orderItem;
 	
-	
-	
 
-	public double getTotalPrice() {
-		totalPrice = 0;
+	public double totalPrice() {
+		int totalPrice = 0;
+		for(OrderItem item: orderItem) {
+			totalPrice += item.getPrice();
+		}
 		return totalPrice;
-	}
-
-	public void setTotalPrice(double totalPrice) {
-		this.totalPrice = totalPrice;
 	}
 
 	public Long getId() {
@@ -44,6 +43,29 @@ public class Order {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public void setDate(Date date) {
+		this.createAt = date;
+	}
+	
+	public Date getDate() {
+		return this.createAt;
+	}
+
+	public List<OrderItem> getOrderItem() {
+		return orderItem;
+	}
+
+	public void addOrderItem(OrderItem item) {
+		this.orderItem.add(item);
+	}
+
+	public void setOrderItem(List<OrderItem> orderItem) {
+		this.orderItem = orderItem;
+	}
+	
+	
+	
 	
 	
 }

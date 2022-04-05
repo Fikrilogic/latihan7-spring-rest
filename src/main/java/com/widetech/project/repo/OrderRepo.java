@@ -2,10 +2,12 @@ package com.widetech.project.repo;
 
 import java.util.List;
 
-import com.widetech.project.domain.Order;
-import com.widetech.project.domain.Product;
+import org.springframework.data.repository.CrudRepository;
 
-public interface OrderRepo {
+import com.widetech.project.domain.Order;
+
+public interface OrderRepo extends CrudRepository<Order, Long> {
 	public List<Order>findAll();
-	public Order save(Product product);
+	@SuppressWarnings("unchecked")
+	public Order save(Order order);
 }
